@@ -1,0 +1,353 @@
+  html,
+   body,
+   #mapContainer,
+   #mapDiv {
+      height: 100%;
+      font-family: 'Istok Web', sans-serif;
+   }
+
+   body {
+      padding-right: .8em;
+      padding-left: .8em;
+      padding-top: 0;
+      margin: 0;
+      background-color: rgba(0, 0, 0);
+   }
+
+   #mapContainer {
+      width: 69.5%;
+      margin: 0;
+      box-sizing: border-box;
+      float: right;
+   }
+
+   #sidebar {
+      width: 29%;
+      box-sizing: border-box;
+      display: inline-block;
+      padding: 0px;
+      margin-right: .2em;
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      color: white;
+   }
+
+   #searchDiv {
+      color: white;
+      margin-bottom: .7em;
+      margin-top: .9em;
+      font-size: .9em;
+      text-align: center;
+   }
+
+   #searchDiv span {
+      padding-left: 1.6em;
+   }
+
+   select {
+      font-family: 'Istok Web', sans-serif;
+      font-size: .85em;
+   }
+
+   input[type="radio"] {
+      background-color: initial;
+      cursor: pointer;
+      appearance: auto;
+      box-sizing: border-box;
+      margin: 3px 0px 0px 5px;
+   }
+
+   #markerInfoDiv,
+   #currentLocationInfo {
+      text-align: left;
+      border: 3px solid rgb(83, 83, 83);
+      width: 100%;
+      height: fit-content;
+      min-height: 4em;
+      overflow-wrap: break-word;
+      border-radius: 4px;
+      padding: 6px;
+      padding-right: 0;
+      margin-bottom: 5px;
+      box-sizing: border-box;
+   }
+
+   #markerInfoDiv .infoWindowOnly, #currentLocationInfo .infoWindowOnly {
+      display: none;
+   }
+
+   canvas {
+      margin-top: .1em;
+   }
+
+   .title {
+      text-decoration: underline;
+      font-weight: bold;
+      display: block;
+      margin-bottom: .3em;
+   }
+
+   .subtitle {
+      text-decoration: underline;
+      display: inline-block;
+      margin-bottom: .2em;
+   }
+
+   #infoWindowWrapper div {
+      margin-top: .38em;
+   }
+
+   .noSpace {
+      margin-top: 0 !important;
+   }
+
+   header {
+      margin-top: .7em;
+      margin-bottom: .7em;
+      box-sizing: border-box;
+   }
+
+   header h1 {
+      text-align: center;
+      font-style: italic;
+      border: 3px solid rgb(83, 83, 83);
+      width: 40%;
+      margin: auto;
+      color: black;
+      background-color: rgb(177, 177, 177);
+   }
+
+   #zmanSelectForm {
+      display: none;
+      color: white;
+      background-color: rgb(0, 0, 0.9);
+      opacity: .87;
+      padding-top: 1.7em;
+      padding-right: 1.7em;
+      padding-left: 1.7em;
+      padding-bottom: 1em;
+      border: 5px solid rgb(83, 83, 83);
+      border-radius: 8px;
+      box-sizing: border-box;
+      width: 54%;
+      left: 23%;
+      top: 4%;
+      height: fit-content;
+      position: absolute;
+      z-index: 2;
+   }
+
+   #zmanSelectDisplay {
+      width: fit-content;
+      font-size: 1.15em;
+      padding-bottom: 1.05em;
+      padding-top: 1.05em;
+      padding-right: 1em;
+      padding-left: 1em;
+      column-count: 2;
+      margin: auto;
+   }
+
+   #disclaimer {
+      display: none;
+      color: white;
+      background-color: rgba(0, 0, 0, .9);
+      opacity: .87;
+      padding: 2.2em;
+      padding-top: .25em;
+      border: 5px solid rgb(60, 60, 60);
+      border-radius: 8px;
+      box-sizing: border-box;
+      width: 46em;
+      height: fit-content;
+      position: absolute;
+      top: 4%;
+      left: 50%;
+      margin-left: -23em;
+      z-index: 2;
+   }
+
+   #instructions {
+      display: none;
+      color: white;
+      background-color: white;
+      padding-left: 0;
+      padding-right: 0;
+      border: 5px solid rgb(0, 0, 0, .75);
+      border-radius: 8px;
+      box-sizing: border-box;
+      width: 63%;
+      height: auto;
+      position: absolute;
+      top: 1.5%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 2;
+   }
+
+   #instructions h2 {
+      text-align: center;
+      background-color: rgb(0, 0, 0, .9);
+      margin: 0;
+      padding-top: .5em;
+      padding-bottom: .1em;
+   }
+   #instructions h4{
+      margin-top: 1em;
+      margin-bottom: 1em;
+   }
+
+   #instructions .buttons {
+      text-align: center;
+      background-color: rgb(0, 0, 0, .9);
+      margin: 0;
+      padding-top: .5em;
+      padding-bottom: .5em;
+   }
+
+   button {
+      display: inline-block;
+      padding: 0.1em .5em;
+      border: .17em solid rgb(83, 83, 83, .9);
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+      font-weight: 400;
+      color: black;
+      background-color: #CCCCCC;
+      text-align: center;
+   }
+
+   button:hover {
+      border-color: #7a7a7a;
+      background-color: #d8d8d8;
+   }
+
+   button:active {
+      background-color: #999999;
+   }
+
+   .collapsableTitle.instructions {
+      cursor: pointer;
+      transition: .5s;
+      background-color: rgb(0, 0, 0, .9);
+      padding-left: 2em;
+      padding-right: 2em;
+   }
+
+   .collapsableTitle.instructions:hover, .collapsableTitle.instructions.opened {
+      background-color: rgba(0, 0, 0, 0.75);
+   }
+
+   div.opened.instructions h4 {
+      text-decoration: underline;
+   }
+
+   .collapsableTitle.instructions.opened:hover {
+      background-color: rgb(0, 0, 0, .85);
+   }
+
+   div.opened .arrow {
+      left: 30%;
+      content: url("../whiteDownArrow24.png");
+      vertical-align: middle;
+   }
+
+   div .arrow {
+      content: url("../whiteSideArrow24.png");
+      vertical-align: middle;
+   }
+
+   .arrowBuffer.instructions {
+      width: 95%;
+      display: inline-block;
+   }
+
+   .collapsableContent.instructions {
+      display: none;
+      padding-top: 0em;
+      padding-bottom: 0em;
+      padding-left: 2em;
+      padding-right: 2em;
+      color: black;
+      background-color: white;
+      overflow: hidden;
+      transition: .5s;
+      border: 4px solid rgba(0, 0, 0, 0.8);
+      border-top-width: 0;
+   }
+
+   #instructions p :first-child:not(:last-child) {
+      margin-top: 0;
+      margin-bottom: .8em;
+   }
+
+   #instructions p :last-child {
+      margin-top: .8em;
+      margin-bottom: 0;
+   }
+
+   #instructions .subtitle {
+      margin-bottom: 1em;
+      margin-top: 1em;
+   }
+
+   #instructions a:visited {
+      color: purle;
+   }
+
+   #instructions a:link {
+      color: blue;
+   }
+
+   #instructions a:hover {
+      color: red;
+   }
+
+   .arrowBuffer.sidebar {
+      width: 91%;
+      display: inline-block;
+   }
+
+   #modalDiv {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(83, 83, 83, .78);
+      opacity: .7;
+      display: none;
+      z-index: 1;
+   }
+
+   #disclaimer h2 {
+      text-align: center;
+   }
+
+   #zmanSelectForm h2 {
+      margin-bottom: 0;
+      margin-top: .15em;
+      text-align: center;
+   }
+
+   .buttons {
+      text-align: center;
+   }
+
+   #zmanSelectButtonsDiv button {
+      margin-right: 1em;
+      margin-bottom: .75em;
+   }
+
+   #infoWindowWrapper {
+      display: none;
+      max-width: 19em;
+      max-height: 18em;
+   }
+
+   #markerYerushDirection {
+      display: none;
+   }
