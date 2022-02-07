@@ -69,31 +69,6 @@
     <div id=instructions>
         <h2>Notes On Using This Site</h2>
 
-        <!-- your current location -->
-        <div>
-            <div class="collapsableTitle instructions">
-                <div class="arrowBuffer instructions">
-                    <h4>Your Current Location</h4>
-                </div><img class="arrow">
-            </div>
-            <div class="collapsableContent instructions">
-                <p>
-                    If you are using https, then you can grant this site permission to access your current location. At
-                    this stage of this site's development, we cannot properly calculate the zmanim for any location on
-                    the map without access to your current location. However, other information (e.g. weather) is
-                    available for other locations regardless of having access to your current location. It should be
-                    noted that your current location is determined using the Geolocation API, and our knowledge of your
-                    location is only as accurate as the data we receive from the Geolocation API. This may vary
-                    depending on your specific situation. You can check the accuracy simply by visual confirmation that
-                    the "Your Current Location" section of the map is in fact where you are currently located.
-                </p>
-                <p>
-                    A marker will automatically be added to the map to represent your current location. Please note that
-                    this marker will not have an info-Window attached to it.
-                </p>
-            </div>
-        </div>
-
         <!-- using map markers -->
         <div>
             <div class="collapsableTitle instructions">
@@ -188,7 +163,7 @@
         <div>
             <div class="collapsableTitle  instructions">
                 <div class="arrowBuffer instructions">
-                    <h4>Some Notes on  Specific Zmanim</h4>
+                    <h4>Some Notes on Specific Zmanim</h4>
                 </div><img class="arrow">
             </div>
             <div class="collapsableContent instructions">
@@ -199,9 +174,9 @@
                 </p>
                 <p>
                     We calculate the beginning of mincha gedola lechumra in accordance with the stringency of Sha'ar
-                    Ha'tziun siman 233 seif katan 8. This means that when sha'os zmanios are longer than 60 minutes,
-                    then mincha gedola will not begin until half of a full sha'ah zmanis, even though that comes out to
-                    more than half of a regular hour.
+                    Ha'tziun siman 233 seif katan 8. This means that when a sha'ah zmanis is longer than 60 minutes,
+                    mincha gedola will not begin until half of a sha'ah zmanis after chatzos, even if that's
+                    more than 30 minutes after chatzos.
                 </p>
             </div>
         </div>
@@ -239,7 +214,7 @@
                 <p>
                     Although it is simple to plot out a straight path from point A to point B on a flat map, plotting
                     out a "straight path" from point A to point B along the earth's roughly-spherical shape is not a
-                    simple matter. A full explanation is beyond the scope of these instructions, but a very brief
+                    simple matter. A full explanation is beyond the scope of these notes, but a very brief
                     explanation follows here.
                 </p>
                 <p>
@@ -261,25 +236,29 @@
                     Yerushalayim.
                 </p>
                 <p>
-                    The second direct way to get from point A to B is to initially leave from point A heading in a
-                    compass-direction such that continuing to travel on a straight path without any veering will bring
+                    The second direct way to get from point A to B is to leave from point A initially heading in a
+                    direction such that continuing to travel on a straight path without any veering will bring
                     one to point B. Any path that fits this description is known as a "great circle route." On a
                     standard flat map, a great circle route between points A and B appears to be curved, and
-                    significantly so when A and B are a great distance apart. Nevertheless, since this is a straight
-                    path with no veering the entire route, it is the shortest path between points A and B. Airlines
-                    commonly use these routes to conserve time and fuel. However, as one travels along this straight
-                    route, his compass-bearing will constantly be changing. Using our above example of New York to
-                    Yerushalayim, if one heads out of New York with an initial compass-direction of 54° (approximately
-                    north-east) and maintains a straight path, he will arrive in Yerushalayim.
+                    significantly so when A and B are a great distance apart. Nevertheless, since this is in fact a
+                    straight path along the earth's roughly-spherical shape with no veering the entire route, it is the
+                    shortest path between points A and B. Airlines commonly use these routes to conserve time and fuel.
+                    However, as one travels along this straight route, his compass-bearing will constantly be changing.
+                    Using our above example of New York to Yerushalayim, if one heads out of New York with an initial
+                    compass-direction of 54° (slightly east of north-east) and maintains a straight path, he will arrive
+                    in
+                    Yerushalayim. See this link for a very interesting interactive model of <a target="blank"
+                        href="https://www.greatcirclemap.com/globe?routes=LGA-TLV%2C%20LAX-TLV&unit=nm">
+                        great circle routes.</a>
                 </p>
                 <p>
                     In our example above of New York to Yerushalayim, there is a significant difference between the
                     rhumb line route (maintaining a compass direction of 96°) and the great circle route (heading out
                     with an initial compass direction of 54° and maintaining a straight path). However, when points A
                     and B are relatively close to each other, there is little difference between the great circle route
-                    and the rhumb line route. See this link for a very interesting interactive model of <a
-                        target="blank" href="https://www.greatcirclemap.com/globe?routes=LGA-TLV%2C%20LAX-TLV&unit=nm">
-                        great circle routes.</a>
+                    and the rhumb line route. You can verify this fact on this site by placing map markers relatively
+                    close to Yerushalayim and comparing the respective differences between the rhumb line and great
+                    circle directions to Yerushalayim.
                 </p>
                 <p>
                     When determining how to position oneself to face Yerushalayim when davening, which one of the above
@@ -299,6 +278,34 @@
             </div>
         </div>
 
+         <!-- your current location -->
+         <div>
+            <div class="collapsableTitle instructions">
+                <div class="arrowBuffer instructions">
+                    <h4>Your Current Location</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p>
+                    If you are using https, then you can grant this site permission to access your current location. At
+                    this stage of this site's development, we cannot properly calculate the zmanim for any location on
+                    the map without access to your current location. However, other information (e.g. weather) is
+                    available for other locations regardless of having access to your current location.
+                </p>
+                <p>
+                    It should be noted that your current location is determined using the Geolocation API, and our
+                    knowledge of your location is only as accurate as the data we receive from the Geolocation API. This
+                    may vary depending on your specific situation. You can check the accuracy simply by visual
+                    confirmation that the "Your Current Location" section of the map is in fact where you are currently
+                    located.
+                </p>
+                <p>
+                    A marker will automatically be added to the map to represent your current location. Please note that
+                    this marker will not have an info-Window attached to it.
+                </p>
+            </div>
+        </div>
+
         <!-- zmaim for extreme north or south -->
         <div>
             <div class="collapsableTitle instructions">
@@ -308,9 +315,10 @@
             </div>
             <div class="collapsableContent instructions">
                 <p>Locations at Earth's extreme north or south experience times of the year when the sun doesn't fully
-                    or even partially rise or set. Then zmanim for such locations may display an error, and even if an
-                    error is not displayed, the zmanim will be totally invalid. This situation presents a unique
-                    halachic question, and one who finds himself in such a location should consult a Rav on how to
+                    or even partially rise or set. The zmanim for such locations may display an error ("NaN"), and even
+                    if an
+                    error is not displayed, the zmanim may not be valid. This situation presents a unique
+                    halachic question, and one who plans to be in such a location should consult a Rav regarding how to
                     proceed.
                 </p>
             </div>
@@ -481,9 +489,9 @@
 
     </div>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?v=3.47&key=AIzaSyAIjP6gr_Iq36rvT95t1zww2IJBNW5lmNQ&libraries=drawing">
-        </script>
+    <!-- <script
+        src="https://maps.googleapis.com/maps/api/js?v=3.47&key=AIzaSyB_5DWDRGpXDFe1l0gu3j0r0v9EPl82PhE&libraries=drawing">
+        </script> -->
     <!-- <script type="module" src="zmanimMap.js"></script> -->
 </body>
 

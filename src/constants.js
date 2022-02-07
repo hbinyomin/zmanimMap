@@ -6,7 +6,6 @@ export const locationSelector = $('#locSelect');
 export const dateInput = $('#dateInput');
 export const modalDiv = $('#modalDiv');
 
-
 export const currentLocNameDisp = $('#currentLocationName');
 export const currentLocInfoWrapper = $('#currentLocWrapper');
 export const currentLocInfoDisp = $('#currentLocationInfo');
@@ -41,7 +40,7 @@ const tzefas = { name: "Tzefas", position: { lat: 32.967195, lng: 35.503338 }, z
 const bnaiBrak = { name: "Bnai Brak", position: { lat: 32.086065, lng: 34.832329 }, zoom: 14 };
 const europe = { name: "Europe", position: { lat: 45, lng: 15 }, zoom: 4 };
 
-export const placesArray = [eretzYisrael, yerushalayim, tzefas, bnaiBrak, beitShemesh, newYork, lakewood, losAngeles, chicago, phoenix, houston, stLouis, miami, toronto, world, america, europe];
+export const placesArray = [eretzYisrael, yerushalayim, tzefas, bnaiBrak, beitShemesh, america, newYork, lakewood, losAngeles, chicago, phoenix, houston, stLouis, miami, toronto, europe, world];
 export const currentLocationZoom = 20;
 
 export const currentLocationCanvas1 = document.getElementById('currentLocationCanvas1');
@@ -54,8 +53,6 @@ export const infoWindowCanvas2 = document.getElementById('infoWindowCanvas2');
 export const zmanSelectForm = $('#zmanSelectForm');
 export const instructions = $('#instructions');
 
-
-
 export const infoWindowLocationName = $('#infoWindowLocationName');
 export const infoWindowLatLng = $('#infoWindowLatLng');
 export const infoWindowAltitude = $('#infoWindowAltitude');
@@ -63,4 +60,3 @@ export const infoWindowWeather = $('#infoWindowWeather');
 export const infoWindowZmanim = $('#infoWindowZmanim');
 export const infoWindowYerushDirection = $('#infoWindowYerushDirection');
 export const infoWindowWrapper = $('#infoWindowWrapper');
-
