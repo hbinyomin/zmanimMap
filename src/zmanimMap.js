@@ -166,6 +166,9 @@ function getSunCalcZmanim(lat, lng, newPlaceGmtOffset, dateObject) {
 
    const sunCalcData = getSunCalcTimes(dateObject, lat, lng);
 
+   // getSunCalcTimes() returns sun event times in format of a Date object in terms of user's local time. (Therefore we need user's gmtOffset)
+   // The function invoked a few lines below- getZmanInMinutes() extracts the relevant data from the Date object and returns a 
+   // single number that is the sun event in terms of minutes after 12 am
    const data = {
       lat: lat,
       lng: lng,
@@ -204,7 +207,8 @@ function getZmanInMinutes(zmanAsDateObject, newPlaceGmtOffset) {
 function getZmanimPackage(data) {
 
    // takes in a paramater called data, which is an object
-   // with fields .dateObject, .lat, .lng .sunrise and .sunset, and 8.5° etc that are sunrise/set given in minutes after 12 am 
+   // with fields .dateObject, .lat, .lng, as well as fields of the sun events .sunrise and .sunset, and 8.5° 
+   // etc that are the respective sun events given in minutes after 12 am 
    const sunrise_inMinutes = data.sunrise;
    const sunset_inMinutes = data.sunset;
 
@@ -245,9 +249,12 @@ function getZmanimPackage(data) {
       dateStrings: getDateStrings(data.dateObject),
       lat: data.lat,
       lng: data.lng,
+
       // the third paramater passed to getZmanObject is boolean if should be rounded earlier
       // true = earlier; false = later
       zmanim: [
+         // getZmanObject() returns an object that has on it the integers of the clock-time hour,minute,and second of  the given zman,
+         // as well as a string and compact string of the clock-time of the given zman 
          getZmanObject('Alos Hashachar 16.1°', alos_16_1, false),
          getZmanObject('Alos Hashachar 72 minutes fixed', alos72, false),
          getZmanObject('Misheyakir 11°', misheyakir_11, false),
@@ -278,6 +285,9 @@ function getZmanimPackage(data) {
 }
 
 function getZmanObject(name, zmanMinutes, roundEarlier) {
+   // getZmanObject() takes in "zmanMinutes"- the desired zman given in minutes after 12am, and
+   // returns an object that has on it the integers of the clock-time hour,minute,and second of  the desired zman,
+   // as well as a string of  the   clock-time of the desired zman 
    let hour = Math.floor(zmanMinutes / 60);
    const minutes = Math.floor((zmanMinutes % 60));
    const seconds = Math.floor(((zmanMinutes % 60) - minutes) * 60);

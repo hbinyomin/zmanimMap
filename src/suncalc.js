@@ -96,7 +96,7 @@ var times = SunCalc.times = [
     [-0.833, 'sunrise', 'sunset'],
     [-11, 'misheyakir_11', '_11_blank'],// //
     [-10.2, 'misheyakir_10_2', '_10_2_blank'],// misheyakir accd to  some
-    [-8.5, '_8_5_blank', 'tzais_8_5'], // 3 stars - based on 50 NY during summer
+    [-8.5, '_8_5_blank', 'tzais_8_5'], 
     // [-6, 'civilDawn', 'civilDusk'],
     // [-12, 'nauticalDawn', 'nauticalDusk'],
     // [-18, 'astronomicalDawn', 'astronomiclaNight'],
