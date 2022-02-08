@@ -24,9 +24,11 @@ let zmanimToDisplayIndicies = [];
 const blankZman = getZmanimPackage({ sunrise: 0, sunset: 0, lat: 0, lng: 0, dateObject: new Date() });
 const theInfoWindow = new google.maps.InfoWindow();
 
+
+////////////////////   Initialize     ///////////////////////
 initializeApp();
 
-//////////// Current Location,  Invoke Load Map()  ////////////
+////////// Current Location,  Invoke Load Map()  ////////////
 const currentLocationPromise = new Promise((resolve) => {
    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -58,7 +60,7 @@ currentLocationPromise.then(
       }
    });  // end of .then()
 
-////////////////////// Update Zmanim   /////////////////////////
+////////////  Update Current Location Display  /////////////
 async function updateCurrentLocationDisplay() {
    if (currentLat && currentLng) {
       currentLocLatLngDisp.append(`<span class="subtitle infoWindowOnly">Coordinates:</span>  Lat: ${currentLat.toFixed(4)}, Lng: ${currentLng.toFixed(4)}`);
@@ -73,6 +75,7 @@ async function updateCurrentLocationDisplay() {
    }
 }
 
+////////////////////// Update Zmanim   ////////////////////
 async function updateZmanim(lat, lng, gmtOffset, display, newDate) {
 
    if (!gmtOffset) {
@@ -161,7 +164,7 @@ async function getWeather(lat, lng) {
    }
 }
 
-/////////////////////// zmanim  ////////////////////////////
+/////////////////////// zmanim calculations  ////////////////////////////
 function getSunCalcZmanim(lat, lng, newPlaceGmtOffset, dateObject) {
 
    const sunCalcData = getSunCalcTimes(dateObject, lat, lng);
@@ -437,7 +440,7 @@ async function markerPlacedOnMapListener(theMarker) {
    setTimeout(() => theMarker.addListener('click', () => {
       buildAndDisplayInfoWindow(theMarker, latClosure, lngClosure, altitude, weather,
          fluidDate ? rcntMrkrSunCalcZmanim : zmanimClosure); //use closure or global depending if user sets marker to be fluid date or statinary date
-   }), 1050) // don't wait for  altitude too long to set the click listner - altitude api sometimes acts up 
+   }), 1050) // don't wait too long for the response from altitude api before setting the click listner - altitude api sometimes acts up 
 
    //altitude
    altitude = await updateAltitude(recentMarkerLat, recentMarkerLng, sidebarRcntMrkrAltitudeDisp);
