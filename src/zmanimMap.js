@@ -462,23 +462,6 @@ function updateSidebarYerushAndLatLng(lat, lng) {
 
 function buildAndDisplayInfoWindow(theMarker, lat, lng, altitude, weather, theMarkerSunCalcZmanim) {
 
-   infoWindowLatLng.empty().append(`<span class = "subtitle">Coordinates:</span> Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`);
-
-   infoWindowAltitude.empty().append(`<span class="subtitle">Altitude:</span> ${altitude ? altitude + ' feet' : 'Altitude not available'}`);
-
-   //weather
-   infoWindowWeather.empty();
-   if (weather) {
-      infoWindowWeather.append(
-         `<span class="subtitle">Current Weather:</span>
-            ${Math.floor(weather.main.temp)}°F, and ${weather.weather[0].description}, with wind at ${weather.wind.speed} mph, and humidity of ${weather.main.humidity}%.  `
-      );
-      infoWindowLocationName.empty().append(`<span class="subtitle">Place Name:</span> ${weather.name}`);
-   }
-   else {
-      infoWindowWeather.append(`<span class="subtitle">Current Weather:</span> Weather for this location not available `);
-   }
-
    //zmanim
    infoWindowZmanim.empty();
    if (zmanimToDisplayIndicies.length === 0) {
@@ -500,9 +483,29 @@ function buildAndDisplayInfoWindow(theMarker, lat, lng, altitude, weather, theMa
    const latClosure = lat, lngClosure = lng;
    infoWindowYerushDirection.empty().append(savedCanvas1, savedCanvas2);
    updateDirectionToYerushalayim(infoWindowCanvas1, infoWindowCanvas2, latClosure, lngClosure);
+   
+   
+   //altitude
+   infoWindowLatLng.empty().append(`<span class = "subtitle">Coordinates:</span> Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`);
+
+   infoWindowAltitude.empty().append(`<span class="subtitle">Altitude:</span> ${altitude ? altitude + ' feet' : 'Altitude not available'}`);
+
+   //weather
+   infoWindowWeather.empty();
+   if (weather) {
+      infoWindowWeather.append(
+         `<span class="subtitle">Current Weather:</span>
+            ${Math.floor(weather.main.temp)}°F, and ${weather.weather[0].description}, with wind at ${weather.wind.speed} mph, and humidity of ${weather.main.humidity}%.  `
+      );
+      infoWindowLocationName.empty().append(`<span class="subtitle">Place Name:</span> ${weather.name}`);
+   }
+   else {
+      infoWindowWeather.append(`<span class="subtitle">Current Weather:</span> Weather for this location not available `);
+   }
+
 
    // finish build and display
-   infoWindowWrapper.append(infoWindowLatLng, infoWindowAltitude, infoWindowWeather, infoWindowZmanim, infoWindowYerushDirection);
+   infoWindowWrapper.append(infoWindowZmanim, infoWindowYerushDirection, infoWindowLatLng, infoWindowAltitude, infoWindowWeather);
    theInfoWindow.setContent(infoWindowWrapper[0]);
    infoWindowWrapper.show();
    theInfoWindow.open(map, theMarker);
