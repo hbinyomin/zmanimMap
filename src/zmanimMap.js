@@ -288,6 +288,7 @@ function getZmanimPackage(data) {
 }
 
 function getZmanObject(name, zmanMinutes, roundEarlier) {
+// function getZmanObject(name, zmanMinutes) {
    // getZmanObject() takes in "zmanMinutes"- the desired zman given in minutes after 12am, and
    // returns an object that has on it the integers of the clock-time hour,minute,and second of  the desired zman,
    // as well as a string of  the   clock-time of the desired zman 
@@ -300,6 +301,7 @@ function getZmanObject(name, zmanMinutes, roundEarlier) {
       am = false;
       hour -= 12;
    }
+   
    if (hour === 0) {
       hour = 12;
    }
@@ -470,7 +472,7 @@ function buildAndDisplayInfoWindow(theMarker, lat, lng, altitude, weather, theMa
    if (zmanimToDisplayIndicies.length > 0 && theMarkerSunCalcZmanim && theMarkerSunCalcZmanim.dateStrings.printable) {
       infoWindowZmanim.append(`<span class="subtitle">Zmanim for ${theMarkerSunCalcZmanim.dateStrings.printable}:</span>`);
       zmanimToDisplayIndicies.forEach((zmanIndex) => {
-         infoWindowZmanim.append(` <div class="noSpace" id="IW${zmanIndex}">${theMarkerSunCalcZmanim.zmanim[zmanIndex].name}: ${theMarkerSunCalcZmanim.zmanim[zmanIndex].string} `);
+         infoWindowZmanim.append(` <div class="noSpace" id="IW${zmanIndex}">${theMarkerSunCalcZmanim.zmanim[zmanIndex].name}: ${theMarkerSunCalcZmanim.zmanim[zmanIndex].fullString} `);
       })
    }
    if (zmanimToDisplayIndicies.length > 0 && !theMarkerSunCalcZmanim) {
@@ -624,7 +626,12 @@ function refreshSidebarZmanimDispAccdToDispChoices(display, zmanimData) {
          );
          zmanimToDisplayIndicies.forEach((index) => {
             display.append(
-               `<br>${zmanimData.zmanim[index].name}: ${zmanimData.zmanim[index].string}`
+               // 
+               // 
+               // 
+               // 
+
+               `<br>${zmanimData.zmanim[index].name}: ${zmanimData.zmanim[index].fullString}`
             );
          });
       }
