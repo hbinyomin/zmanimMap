@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive ZmanimMap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Istok+Web&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/sidebarAccordian.css">
+    
+</head>
+
+<body>
+    <header>
+        <h1>ZmanimMap</h1>
+        <div id="searchDiv">
+            <span>
+                <button id="instructionsButton">How to Use This Site</button>
+            </span>
+            <span>
+                <button id="zmanSelectButton">Select Zmanim to Display</button>
+            </span>
+            <span id=dateSpan>
+                <label for="date">Date Selector:</label>
+                <input type="date" name="date" id="dateInput">
+            </span>
+            <span>
+                <input type="radio" id="fluid" name="dateSelectRange" value="fluid" checked>
+                <label for="fluid">Fluid-Date Marker</label>
+                <input type="radio" id="stationary" name="dateSelectRange" value="stationary">
+                <label for="stationary">Stationary-Date Marker</label>
+            </span>
+            <span>
+                <label>Focus Map To:</label>
+                <select id="locSelect">
+                    <option hidden>------------------</option>
+                </select>
+            </span>
+        </div>
+    </header>
+
+    <div id='modalDiv'></div>
+
+    <div id="disclaimer">
+        <h2>Halachic Disclaimer</h2>
+        <p> Even if one utilizes an advanced algorithm to calculate zmanim with high precision, current atmospheric
+            conditions that are impossible to predict can nevertheless affect the accuracy of the zmanim. Thus, one
+            should never rely on a zmanim calendar up until the last minute. Zmanim can also be significantly affected
+            by altitude differences, which many calendars do not take into account.
+        </p>
+        <p> This site is in the development stage and currently uses an algorithm that approximates zmanim for any given
+            coordinates. The zmanim presented on this site therefore cannot be considered halachically precise
+            even without accounting for possible inaccuracies resulting from atmospheric conditions, and thus
+            should not be used for any halachic purpose. Additionally, some of the zmanim presented only represent the
+            view of a minority opinion amongst the Poskim. Please consult a Rav regarding which view to follow.
+        </p>
+        <p>Depending on the location selected, one may need to adjust for daylight savings time.
+            To view details regarding daylight savings time as well as how this site
+            rounds zmanim, please click the "How to Use This Site" button on the home screen.
+        </p>
+        <p> Please continue with this understanding.</p>
+
+        <div class="buttons">
+            <button id="acceptDisclaimer">I Understand</button>
+        </div>
+    </div>
+
+    <div id=instructions>
+        <h2>Notes On Using This Site</h2>
+
+        <!-- using map markers -->
+        <div>
+            <div class="collapsableTitle instructions">
+                <div class="arrowBuffer instructions">
+                    <h4> Using Map Markers - Fluid and Stationary Dates</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent  instructions">
+                <p>
+                    Use the marker tool to add markers anywhere on the map. Use the hand tool to click on any marker to
+                    view the info window containing current information for that marker's location. Please note that
+                    the marker that is automatically added at your current location will not have an info-Window
+                    attached
+                    to it.
+                </p>
+                <p>Each marker placed will be assigned either a "Fluid Date" or "Stationary Date." A marker that is
+                    assigned a "Fluid Date" will adjust the zmanim it displays in accordance with any future adjustment
+                    of the date selector. A marker assigned a "Stationary Date" will always display zmanim for the
+                    selected date at the time that the marker is placed, regardless of future adjustments to the date
+                    selector. This is helpful if you would like to compare zmanim for different locations, each with a
+                    different date. You can control weather to assign a marker a "Fluid Date" or "Stationary Date" by
+                    making the appropriate selection at the top of the page before placing the marker.
+                </p>
+            </div>
+        </div>
+
+        <!-- date selector -->
+        <div>
+            <div class="collapsableTitle instructions">
+                <div class="arrowBuffer instructions">
+                    <h4> Date Selector</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p>
+                    The default date for the zmanim displayed is the current date. You can adjust the date by using the
+                    date selection at the top of the page. This will automatically update the zmanim in the sidebar
+                    display in accordance with the new date. For info how the date selector applies to the markers, see
+                    above "Using Map Markers."
+                </p>
+            </div>
+        </div>
+
+        <!-- accuracy of zmaim -->
+        <div>
+            <div class="collapsableTitle  instructions">
+                <div class="arrowBuffer instructions">
+                    <h4> Accuracy of Zmanim</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p> Even if one utilizes an advanced algorithm to calculate zmanim with high precision, current
+                    atmospheric conditions that are impossible to predict can nevertheless affect the accuracy of the
+                    zmanim. Thus, one should never rely on a zmanim calendar up until the last minute. Zmanim can also
+                    be significantly affected by altitude differences, which many calendars do not take into account.
+                </p>
+                <p> This site is in the development stage and currently uses an algorithm that approximates zmanim for
+                    any given coordinates. The zmanim presented on this site therefore cannot be considered halachically
+                    precise even without accounting for possible inaccuracies resulting from atmospheric conditions, and
+                    thus should not be used for any halachic purpose. Additionally, some of the zmanim presented only
+                    represent the view of a minority opinion amongst the Poskim. Please consult a Rav regarding which
+                    view to follow.
+                </p>
+                <p>Depending on the location selected, one may need to adjust for daylight savings time. See the
+                    "Daylight Savings Time" section below for details.
+                </p>
+            </div>
+        </div>
+
+        <!-- rounding of zmanim -->
+        <div>
+            <div class="collapsableTitle  instructions">
+                <div class="arrowBuffer instructions">
+                    <h4> Rounding of Zmanim</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p>
+                    All zmanim are rounded. However, they are not rounded to the nearest minute. Instead, some zmanim
+                    are rounded to the earlier minute even if there are an additional 59 seconds, and some zmanim are
+                    rounded to the later minute if there is at least 1 additional second.
+                </p>
+                <p> Zmanim that appear in the
+                    following list are rounded earlier, (all other zmanim are rounded later): Shema Gra, Shema MA,
+                    Tefilla Gra, Tefilla MA, Mincha Ketana Gra, Mincha Ketana MA, Samuch l'Mincha Ketana Gra, Samuch
+                    l'Mincha Ketana MA, Shkiah, Samuch l'Krias Smema Arvis
+                </p>
+            </div>
+        </div>
+
+        <!-- notes on  specific zmanim -->
+        <div>
+            <div class="collapsableTitle  instructions">
+                <div class="arrowBuffer instructions">
+                    <h4>Some Notes on Specific Zmanim</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p>
+                    We calculate samuch l'krias shema shel arvis lechumra, assuming that zman krias shema is 45 minutes
+                    after shkiah. Some rabbonim may require krias shema to be said at a point later than 45 minutes
+                    after shkiah. If so, samuch l'krias shema would need to be adjusted accordingly.
+                </p>
+                <p>
+                    We calculate the beginning of mincha gedola lechumra in accordance with the stringency of Sha'ar
+                    Ha'tziun siman 233 seif katan 8. This means that when a sha'ah zmanis is longer than 60 minutes,
+                    mincha gedola will not begin until half of a sha'ah zmanis after chatzos, even if that's
+                    more than 30 minutes after chatzos.
+                </p>
+            </div>
+        </div>
+
+        <!-- dayligt savinngs time -->
+        <div>
+            <div class="collapsableTitle  instructions">
+                <div class="arrowBuffer instructions">
+                    <h4>Daylight Savings Time For Zmanim</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p>Adjustments are made in all zmanim for daylight savings time according to your current location.
+                    Thus, if a selected location adjusts its clocks the same day as your current location, then the
+                    times displayed will be correct. However, if a selected location either does not change the clocks
+                    at all, or it does change, but on a different day than your current location, then you will need to
+                    adjust the times displayed to make up for the discrepancy.
+                </p>
+            </div>
+        </div>
+
+        <!-- direction to yerushalayim -->
+        <div>
+            <div class="collapsableTitle instructions">
+                <div class="arrowBuffer instructions">
+                    <h4> Direction to Yerushalayim</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <!-- <div class="collapsableContent instructions"> -->
+                <p>
+                    There is a well-known halacha that one should face Yerushalayim when davening. This presents an
+                    interesting question when one is a great distance away from Yerushalayim, as will be explained.
+                </p>
+                <p>
+                    Although it is simple to plot out a straight path from point A to point B on a flat map, plotting
+                    out a "straight path" from point A to point B along the earth's roughly-spherical shape is not a
+                    simple matter. A full explanation is beyond the scope of these notes, but a very brief
+                    explanation follows here.
+                </p>
+                <p>
+                    In general there are two different "direct" ways to get from point A to point B on the curved globe.
+                    The first way is to travel along a path that maintains a constant compass bearing the entire
+                    journey. However, compass direction is always relative to earth's north pole, so consider the
+                    following. If one begins a journey heading out at, let's say 45° (north-east), and continues to
+                    travel perfectly straight, his orientation to-, and angle relative to the north pole will constantly
+                    be shifting and thus his compass direction will likewise constantly shift. In order to maintain a
+                    constant compass direction while traveling from point A to B, one needs to travel on a slightly
+                    curved path that will maintain a constant angle between the path and the north pole. This curved
+                    path is known as a "rhumb line." One of the most common map projections – which transposes points on
+                    the earth's curved surface to a flat map - is known as a Mercator projection. The Mercator
+                    projection is based on the same mathematics as a that of a rhumb line, and a [curved] rhumb line
+                    path along the earth will appear as a straight line on a Mercator projection. Let's take an example:
+                    looking at a standard Mercator projection map we see that a straight line heading out of New York at
+                    96° (slightly south-east) connects to Yerushalayim. Thus, if one heads out of NY at 96° and, using
+                    his compass, constantly veers to maintain a constant compass direction, he will end up in
+                    Yerushalayim.
+                </p>
+                <p>
+                    The second direct way to get from point A to B is to leave from point A initially heading in a
+                    direction such that continuing to travel on a straight path without any veering will bring
+                    one to point B. Any path that fits this description is known as a "great circle route." On a
+                    standard flat map, a great circle route between points A and B appears to be curved, and
+                    significantly so when A and B are a great distance apart. Nevertheless, since this is in fact a
+                    straight path along the earth's roughly-spherical shape with no veering the entire route, it is the
+                    shortest path between points A and B. Airlines commonly use these routes to conserve time and fuel.
+                    However, as one travels along this straight route, his compass-bearing will constantly be changing.
+                    Using our above example of New York to Yerushalayim, if one heads out of New York with an initial
+                    compass-direction of 54° (slightly east of north-east) and maintains a straight path, he will arrive
+                    in
+                    Yerushalayim. See this link for a very interesting interactive model of <a target="blank"
+                        href="https://www.greatcirclemap.com/globe?routes=LGA-TLV%2C%20LAX-TLV&unit=nm">
+                        great circle routes.</a>
+                </p>
+                <p>
+                    In our example above of New York to Yerushalayim, there is a significant difference between the
+                    rhumb line route (maintaining a compass direction of 96°) and the great circle route (heading out
+                    with an initial compass direction of 54° and maintaining a straight path). However, when points A
+                    and B are relatively close to each other, there is little difference between the great circle route
+                    and the rhumb line route. You can verify this fact on this site by placing map markers relatively
+                    close to Yerushalayim and comparing the respective differences between the rhumb line and great
+                    circle directions to Yerushalayim.
+                </p>
+                <p>
+                    When determining how to position oneself to face Yerushalayim when davening, which one of the above
+                    methods should he use? This is a subject of dispute amongst the Poskim and one should consult a rav
+                    regarding which view to follow. It should be noted that there may be other factors that would
+                    override the preference of facing Yerushalayim and one should consult a rav regarding how to conduct
+                    himself.
+                </p>
+                <p>
+                    For each location, this site presents both the constant compass bearing of the rhumb line route, as
+                    well as the initial compass bearing of the great circle route to Yerushalayim. The above is
+                    displayed both in a numeric measurement of degrees and in a visual representation of a compass
+                    pointing to the given degrees. For the degree measurements use the following key: 0° = north, 90° =
+                    east, 180° = south, and 270° = west. For the compass representation: up is north (0°), right is east
+                    (90°), down is south (180°), and left is west (270°).
+                </p>
+            </div>
+        </div>
+
+         <!-- your current location -->
+         <div>
+            <div class="collapsableTitle instructions">
+                <div class="arrowBuffer instructions">
+                    <h4>Your Current Location</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p>
+                    If you are using https, then you can grant this site permission to access your current location. At
+                    this stage of this site's development, we cannot properly calculate the zmanim for any location on
+                    the map without access to your current location. However, other information (e.g. weather) is
+                    available for other locations regardless of having access to your current location.
+                </p>
+                <p>
+                    It should be noted that your current location is determined using the Geolocation API, and our
+                    knowledge of your location is only as accurate as the data we receive from the Geolocation API. This
+                    may vary depending on your specific situation. You can check the accuracy simply by visual
+                    confirmation that the "Your Current Location" section of the map is in fact where you are currently
+                    located.
+                </p>
+                <p>
+                    A marker will automatically be added to the map to represent your current location. Please note that
+                    this marker will not have an info-Window attached to it.
+                </p>
+            </div>
+        </div>
+
+        <!-- zmaim for extreme north or south -->
+        <div>
+            <div class="collapsableTitle instructions">
+                <div class="arrowBuffer instructions">
+                    <h4>Zmanim for the Extreme North or South</h4>
+                </div><img class="arrow">
+            </div>
+            <div class="collapsableContent instructions">
+                <p>Locations at Earth's extreme north or south experience times of the year when the sun doesn't fully
+                    or even partially rise or set. The zmanim for such locations may display an error ("NaN"), and even
+                    if an
+                    error is not displayed, the zmanim may not be valid. This situation presents a unique
+                    halachic question, and one who plans to be in such a location should consult a Rav regarding how to
+                    proceed.
+                </p>
+            </div>
+        </div>
+
+        <div id=instructionsFooter class=buttons>
+            <button id="instructionsOk">Close</button>
+        </div>
+
+    </div>
+
+    <form id="zmanSelectForm">
+        <h2>Check Which Zmanim to Display:</h2>
+        <div id=zmanSelectDisplay></div>
+        <div id="zmanSelectButtonsDiv" class="buttons">
+            <button id="selectAll" type="button">Select All</button>
+            <button id="clearAll" type="button">Clear All</button>
+            <button id="apply">Apply</button>
+            <button id="cancel" type="button">Cancel</button>
+        </div>
+    </form>
+
+    <div id="sidebar">
+        <div id=currentLocationInfo>
+            <span class="title sidebar">Current Location:</span>
+            <div id="currentLocWrapper">
+                <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Place Name</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=currentLocationName class="collapsableContent sidebar"></div>
+                </div>
+
+                <!-- <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Latitude/Longitude</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=currentLatLngDisp class="collapsableContent sidebar"></div>
+                </div>
+
+                <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Altitude</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=currentAltitude class="collapsableContent sidebar"></div>
+                </div>
+
+                <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Current Weather Conditions</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=currentWeather class="collapsableContent sidebar">
+                    </div>
+                </div> -->
+
+                <div>
+                    <div id="currentLocZmanimTitle" class="collapsableTitle sidebar opened">
+                        <div class="arrowBuffer sidebar">
+                            <span>Zmanim</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=currentLocationZmanim class="collapsableContent sidebar" style="display: block;">
+                        <span id=zmanimFiller>Click the "Select Zmanim to Display" button to choose which zmanim to
+                            display</span>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="collapsableTitle sidebar opened">
+                        <div class="arrowBuffer sidebar">
+                            <span>Direction To Yerushalayim</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=currentLocationYerushDirection class="collapsableContent sidebar" style="display: block";>
+                        <canvas id="currentLocationCanvas1" height=100 width=300></canvas>
+                        <canvas id="currentLocationCanvas2" height=100 width=300></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id=markerInfoDiv><span class="title sidebar">Most Recent Marker:</span>
+            <div id=markerInfoWrapper>
+                <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Place Name</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=markerLocationName class="collapsableContent sidebar"></div>
+                </div>
+
+                <!-- <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Latitude/Longitude</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=latLngDisp class="collapsableContent sidebar"></div>
+                </div>
+
+                <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Altitude</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=markerAltitude class="collapsableContent sidebar"></div>
+                </div>
+
+                <div>
+                    <div class="collapsableTitle sidebar">
+                        <div class="arrowBuffer sidebar">
+                            <span>Current Weather Conditions</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=markerWeather class="collapsableContent sidebar"></div>
+                </div> -->
+
+                <div>
+                    <div id="markerZmanimTitle" class="collapsableTitle sidebar opened">
+                        <div class="arrowBuffer sidebar">
+                            <span>Zmanim</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=markerZmanim class="collapsableContent sidebar" style="display: block;"></div>
+                </div>
+
+                <div>
+                    <div class="collapsableTitle sidebar opened">
+                        <div class="arrowBuffer sidebar">
+                            <span>Direction To Yerushalayim</span>
+                        </div><img class="arrow">
+                    </div>
+                    <div id=markerYerushDirection class="collapsableContent sidebar" style="display: block;">
+                        <canvas id="markerCanvas1" height=100 width=300></canvas>
+                        <canvas id="markerCanvas2" height=100 width=300></canvas>
+                    </div>
+                </div>
+            </div>
+            <div id=markerInfoFiller></div>
+        </div>
+    </div>
+
+    <div id="mapContainer">
+        <div id="mapDiv"></div>
+    </div>
+
+    <div id="infoWindowWrapper">
+        <div id="infoWindowLocationName"></div>
+        <div id="infoWindowLatLng"></div>
+        <div id="infoWindowAltitude"></div>
+        <div id="infoWindowWeather"></div>
+        <div id="infoWindowZmanim"></div>
+        <div id=infoWindowYerushDirection>
+            <canvas id="infoWindowCanvas1" height=100 width=300></canvas>
+            <canvas id="infoWindowCanvas2" height=100 width=300></canvas>
+        </div>
+
+    </div>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?v=3.47&key=AIzaSyA8UvkHc3ksE_KRcWnXZlx0uqEM1ikbyys&libraries=drawing">
+        </script>
+    <script type="module" src="zmanimMap.js"></script>
+    <!-- <script  src="zmanimMap.js"></script> -->
+</body>
+
+</html>
