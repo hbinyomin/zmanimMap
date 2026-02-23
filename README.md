@@ -1,0 +1,1 @@
+An interactive zmanim map that allows users to select exact locations with Goolge Maps, and calculates location-specific zmanim (prayer times) for the selected location.  The app also calculates and displays the correct direction to face when praying, given the selected location.
